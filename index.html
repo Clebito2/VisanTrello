@@ -69,7 +69,6 @@
             border: 1px solid var(--border-color);
         }
         
-        /* Estilo para o primeiro e último slide */
         .slide.intro-slide .card, .slide.outro-slide .card {
              justify-content: center;
         }
@@ -101,7 +100,7 @@
         }
         
         .start-button:hover {
-            background-color: #8657e1; /* Lilás mais escuro no hover */
+            background-color: #8657e1;
         }
 
         .card h2 {
@@ -188,7 +187,6 @@
             opacity: 0.5;
             cursor: not-allowed;
             transform: none;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
         }
 
         .nav-button svg {
@@ -212,6 +210,7 @@
             border-radius: 50%;
             background-color: var(--border-color);
             transition: background-color 0.3s ease;
+            cursor: pointer;
         }
 
         .dot.active {
@@ -219,18 +218,10 @@
         }
         
         @media (max-width: 768px) {
-            .card {
-                padding: 20px;
-            }
-            .slide {
-                padding: 20px;
-            }
-            .intro-slide h1, .outro-slide h1, .card h2 {
-                font-size: 1.8rem;
-            }
-            .intro-slide p, .outro-slide p, .card p, .card li {
-                font-size: 1rem;
-            }
+            .card { padding: 20px; }
+            .slide { padding: 20px; }
+            .intro-slide h1, .outro-slide h1, .card h2 { font-size: 1.8rem; }
+            .intro-slide p, .outro-slide p, .card p, .card li { font-size: 1rem; }
         }
 
     </style>
@@ -252,44 +243,39 @@
             <div class="slide">
                 <div class="card">
                     <h2>Passo 1: O Ponto de Partida</h2>
-                    <p>Para criar uma nova demanda, comece na coluna <strong>"Instruções"</strong>. Lá você encontrará o cartão modelo chamado <code>Abertura de demanda</code>.</p>
+                    <p>Primeiro, localize o cartão <code>Abertura de demanda</code> na coluna "Instruções".</p>
                     <img src="https://raw.githubusercontent.com/Clebito2/VisanTrello/main/tela%20geral%20trello.png" alt="Visão geral do quadro Trello">
                 </div>
             </div>
 
-            <!-- Slide 2: Criar a partir do Modelo -->
+            <!-- Slide 2: Iniciar a Criação -->
             <div class="slide">
                 <div class="card">
-                    <h2>Passo 2: Crie a partir do Modelo</h2>
-                    <p>Abra o cartão <code>Abertura de demanda</code>. No painel direito, clique no botão azul <strong>"Criar cartão com base em template"</strong> para iniciar o processo.</p>
-                    <img src="https://raw.githubusercontent.com/Clebito2/VisanTrello/main/cart%C3%A3o%20template.png" alt="Detalhes do cartão template">
-                </div>
-            </div>
-
-            <!-- Slide 3: Configurar Demanda -->
-            <div class="slide">
-                <div class="card">
-                    <h2>Passo 3: Configure a Nova Demanda</h2>
-                    <p>Preencha o <strong>título</strong> da sua tarefa. Em seguida, vem o passo crucial:</p>
-                    <div class="attention">
-                        <strong>Atenção Máxima!</strong>
-                        <p>Você <strong>precisa</strong> alterar a <strong>"Lista"</strong> de "Instruções" para <strong>"Demandas da equipe para Simone"</strong>.</p>
-                    </div>
-                    <img src="https://raw.githubusercontent.com/Clebito2/VisanTrello/main/criar%20cart%C3%A3o.png" alt="Janela de criação de cartão">
+                    <h2>Passo 2: Inicie a Criação</h2>
+                    <p>Abra o cartão modelo e clique em <strong>"Criar cartão com base em template"</strong> para começar.</p>
+                    <img src="https://raw.githubusercontent.com/Clebito2/VisanTrello/main/criar%20cart%C3%A3o.png" alt="Clicando em Criar Cartão a partir do Modelo">
                 </div>
             </div>
             
+            <!-- Slide 3: Configurar Demanda -->
+            <div class="slide">
+                 <div class="card">
+                    <h2>Passo 3: Configure a Demanda</h2>
+                    <p>Defina um título e faça o passo mais importante:</p>
+                    <div class="attention">
+                        <strong>Atenção Máxima!</strong>
+                        <p>Altere a <strong>"Lista"</strong> para <strong>"Demandas da equipe para Simone"</strong>.</p>
+                    </div>
+                    <img src="https://raw.githubusercontent.com/Clebito2/VisanTrello/main/janela%20de%20cria%C3%A7%C3%A3o.png" alt="Janela de criação de cartão">
+                </div>
+            </div>
+
             <!-- Slide 4: Detalhar Solicitação -->
             <div class="slide">
                 <div class="card">
-                    <h2>Passo 4: Detalhe sua Solicitação</h2>
-                    <p>Agora que seu cartão está na coluna certa, abra-o e preencha a <strong>Descrição</strong> com o máximo de detalhes. Não se esqueça de:</p>
-                    <ul>
-                        <li>Adicionar <strong>Membros</strong> responsáveis.</li>
-                        <li>Definir um <strong>Prazo de entrega</strong> no campo "Datas".</li>
-                        <li>Anexar documentos ou links importantes.</li>
-                    </ul>
-                    <img src="https://placehold.co/800x450/f3e8ff/3D306B?text=Cole+a+URL+da+imagem+do+Cartão+Finalizado+aqui" alt="Exemplo de um cartão de demanda finalizado">
+                    <h2>Passo 4: Detalhe a Solicitação</h2>
+                    <p>Com o cartão criado na lista certa, abra-o e preencha todas as informações da descrição, adicione membros e defina o prazo de entrega.</p>
+                    <img src="https://raw.githubusercontent.com/Clebito2/VisanTrello/main/Captura%20de%20tela%202025-06-30%20173431.png" alt="Exemplo de um cartão de demanda finalizado">
                 </div>
             </div>
 
@@ -305,15 +291,11 @@
 
     <div class="carousel-nav">
         <button class="nav-button" id="prevBtn">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
-            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" /></svg>
         </button>
         <div class="dots-container" id="dotsContainer"></div>
         <button class="nav-button" id="nextBtn">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
-            </svg>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" /></svg>
         </button>
     </div>
 
@@ -323,26 +305,18 @@
         const nextButton = document.getElementById('nextBtn');
         const prevButton = document.getElementById('prevBtn');
         const dotsContainer = document.getElementById('dotsContainer');
-        const slideWidth = slides[0].getBoundingClientRect().width;
-
+        
         let currentSlide = 0;
 
         // Create dots
         slides.forEach((slide, index) => {
             const dot = document.createElement('button');
             dot.classList.add('dot');
-            dot.addEventListener('click', () => {
-                goToSlide(index);
-            });
+            dot.addEventListener('click', () => goToSlide(index));
             dotsContainer.appendChild(dot);
         });
         
         const dots = Array.from(dotsContainer.children);
-
-        const setSlidePosition = (slide, index) => {
-            slide.style.left = slideWidth * index + 'px';
-        };
-        // slides.forEach(setSlidePosition); // Not needed with flexbox
 
         const goToSlide = (targetIndex) => {
             track.style.transform = 'translateX(-' + 100 * targetIndex + 'vw)';
@@ -351,30 +325,22 @@
         };
 
         const updateNav = () => {
-            // Update buttons
             prevButton.disabled = currentSlide === 0;
             nextButton.disabled = currentSlide === slides.length - 1;
-
-            // Update dots
             dots.forEach(dot => dot.classList.remove('active'));
             dots[currentSlide].classList.add('active');
         };
 
-        // Event Listeners
         nextButton.addEventListener('click', () => {
-            if (currentSlide < slides.length - 1) {
-                goToSlide(currentSlide + 1);
-            }
+            if (currentSlide < slides.length - 1) goToSlide(currentSlide + 1);
         });
 
         prevButton.addEventListener('click', () => {
-            if (currentSlide > 0) {
-                goToSlide(currentSlide - 1);
-            }
+            if (currentSlide > 0) goToSlide(currentSlide - 1);
         });
 
         // Initial setup
-        goToSlide(0);
+        updateNav();
 
     </script>
 </body>
