@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tutorial Trello: Registro de Demandas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #A076F9; /* Lilás principal */
+            --secondary-color: #D9ACF5; /* Lilás mais claro */
+            --accent-color: #FFB84C; /* Destaque */
+            --text-dark: #3D306B; /* Roxo escuro para texto */
+            --text-light: #635985;
+            --white: #FFFFFF;
+            --background-light: #FDF7E4; /* Fundo creme */
+            --border-color: #EAE0FF;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            height: 100vh;
+            overflow: hidden;
+            background-color: var(--background-light);
+            /* Textura sutil de fundo */
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23e6dcf0' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .carousel-container {
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .carousel-track {
+            display: flex;
+            height: 100%;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slide {
+            width: 100vw;
+            height: 100vh;
+            flex-shrink: 0;
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            max-width: 900px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 40px;
+            border: 1px solid var(--border-color);
+        }
+        
+        /* Estilo para o primeiro e último slide */
+        .slide.intro-slide .card, .slide.outro-slide .card {
+             justify-content: center;
+        }
+        
+        .intro-slide h1, .outro-slide h1 {
+            font-family: 'Lora', serif;
+            font-size: 3rem;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+        
+        .intro-slide p, .outro-slide p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 600px;
+        }
+
+        .start-button {
+            margin-top: 30px;
+            padding: 15px 30px;
+            background-color: var(--primary-color);
+            color: var(--white);
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .start-button:hover {
+            background-color: #8657e1; /* Lilás mais escuro no hover */
+        }
+
+        .card h2 {
+            font-family: 'Lora', serif;
+            font-size: 2.5rem;
+            color: var(--text-dark);
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+        
+        .card p, .card li {
+            color: var(--text-light);
+            font-size: 1.1rem;
+            max-width: 700px;
+            text-align: left;
+        }
+        
+        .card ul {
+            display: inline-block;
+            text-align: left;
+            margin-top: 15px;
+        }
+
+        .card img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 25px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .attention {
+            background-color: #fff9e8;
+            border-left: 5px solid var(--accent-color);
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            text-align: left;
+        }
+
+        .attention strong {
+            color: #D97000;
+        }
+
+        code {
+            background-color: var(--border-color);
+            padding: 3px 8px;
+            border-radius: 5px;
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+
+        .carousel-nav {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .nav-button {
+            background: var(--white);
+            border: 1px solid var(--border-color);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .nav-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.12);
+            border-color: var(--primary-color);
+        }
+        
+        .nav-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        .nav-button svg {
+            width: 24px;
+            height: 24px;
+            stroke: var(--primary-color);
+        }
+        
+        .nav-button:disabled svg {
+            stroke: #b4b4b4;
+        }
+
+        .dots-container {
+            display: flex;
+            gap: 10px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--border-color);
+            transition: background-color 0.3s ease;
+        }
+
+        .dot.active {
+            background-color: var(--primary-color);
+        }
+        
+        @media (max-width: 768px) {
+            .card {
+                padding: 20px;
+            }
+            .slide {
+                padding: 20px;
+            }
+            .intro-slide h1, .outro-slide h1, .card h2 {
+                font-size: 1.8rem;
+            }
+            .intro-slide p, .outro-slide p, .card p, .card li {
+                font-size: 1rem;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="carousel-container">
+        <div class="carousel-track">
+            <!-- Slide 0: Introdução -->
+            <div class="slide intro-slide">
+                <div class="card">
+                    <h1>Tutorial Trello</h1>
+                    <p>Um guia interativo para registrar suas demandas de forma eficiente e padronizada. Vamos começar?</p>
+                    <button class="start-button" onclick="goToSlide(1)">Iniciar Tutorial</button>
+                </div>
+            </div>
+
+            <!-- Slide 1: Localizar Template -->
+            <div class="slide">
+                <div class="card">
+                    <h2>Passo 1: O Ponto de Partida</h2>
+                    <p>Para criar uma nova demanda, comece na coluna <strong>"Instruções"</strong>. Lá você encontrará o cartão modelo chamado <code>Abertura de demanda</code>.</p>
+                    <img src="https://raw.githubusercontent.com/Clebito2/VisanTrello/main/tela%20geral%20trello.png" alt="Visão geral do quadro Trello">
+                </div>
+            </div>
+
+            <!-- Slide 2: Criar a partir do Modelo -->
+            <div class="slide">
+                <div class="card">
+                    <h2>Passo 2: Crie a partir do Modelo</h2>
+                    <p>Abra o cartão <code>Abertura de demanda</code>. No painel direito, clique no botão azul <strong>"Criar cartão com base em template"</strong> para iniciar o processo.</p>
+                    <img src="https://raw.githubusercontent.com/Clebito2/VisanTrello/main/cart%C3%A3o%20template.png" alt="Detalhes do cartão template">
+                </div>
+            </div>
+
+            <!-- Slide 3: Configurar Demanda -->
+            <div class="slide">
+                <div class="card">
+                    <h2>Passo 3: Configure a Nova Demanda</h2>
+                    <p>Preencha o <strong>título</strong> da sua tarefa. Em seguida, vem o passo crucial:</p>
+                    <div class="attention">
+                        <strong>Atenção Máxima!</strong>
+                        <p>Você <strong>precisa</strong> alterar a <strong>"Lista"</strong> de "Instruções" para <strong>"Demandas da equipe para Simone"</strong>.</p>
+                    </div>
+                    <img src="https://raw.githubusercontent.com/Clebito2/VisanTrello/main/criar%20cart%C3%A3o.png" alt="Janela de criação de cartão">
+                </div>
+            </div>
+            
+            <!-- Slide 4: Detalhar Solicitação -->
+            <div class="slide">
+                <div class="card">
+                    <h2>Passo 4: Detalhe sua Solicitação</h2>
+                    <p>Agora que seu cartão está na coluna certa, abra-o e preencha a <strong>Descrição</strong> com o máximo de detalhes. Não se esqueça de:</p>
+                    <ul>
+                        <li>Adicionar <strong>Membros</strong> responsáveis.</li>
+                        <li>Definir um <strong>Prazo de entrega</strong> no campo "Datas".</li>
+                        <li>Anexar documentos ou links importantes.</li>
+                    </ul>
+                    <img src="https://placehold.co/800x450/f3e8ff/3D306B?text=Cole+a+URL+da+imagem+do+Cartão+Finalizado+aqui" alt="Exemplo de um cartão de demanda finalizado">
+                </div>
+            </div>
+
+            <!-- Slide 5: Conclusão -->
+            <div class="slide outro-slide">
+                <div class="card">
+                    <h1>Parabéns!</h1>
+                    <p>Processo concluído! Seguindo estes passos, suas demandas serão sempre claras e organizadas, facilitando o trabalho de toda a equipe. Obrigado pela colaboração!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="carousel-nav">
+        <button class="nav-button" id="prevBtn">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+            </svg>
+        </button>
+        <div class="dots-container" id="dotsContainer"></div>
+        <button class="nav-button" id="nextBtn">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+            </svg>
+        </button>
+    </div>
+
+    <script>
+        const track = document.querySelector('.carousel-track');
+        const slides = Array.from(track.children);
+        const nextButton = document.getElementById('nextBtn');
+        const prevButton = document.getElementById('prevBtn');
+        const dotsContainer = document.getElementById('dotsContainer');
+        const slideWidth = slides[0].getBoundingClientRect().width;
+
+        let currentSlide = 0;
+
+        // Create dots
+        slides.forEach((slide, index) => {
+            const dot = document.createElement('button');
+            dot.classList.add('dot');
+            dot.addEventListener('click', () => {
+                goToSlide(index);
+            });
+            dotsContainer.appendChild(dot);
+        });
+        
+        const dots = Array.from(dotsContainer.children);
+
+        const setSlidePosition = (slide, index) => {
+            slide.style.left = slideWidth * index + 'px';
+        };
+        // slides.forEach(setSlidePosition); // Not needed with flexbox
+
+        const goToSlide = (targetIndex) => {
+            track.style.transform = 'translateX(-' + 100 * targetIndex + 'vw)';
+            currentSlide = targetIndex;
+            updateNav();
+        };
+
+        const updateNav = () => {
+            // Update buttons
+            prevButton.disabled = currentSlide === 0;
+            nextButton.disabled = currentSlide === slides.length - 1;
+
+            // Update dots
+            dots.forEach(dot => dot.classList.remove('active'));
+            dots[currentSlide].classList.add('active');
+        };
+
+        // Event Listeners
+        nextButton.addEventListener('click', () => {
+            if (currentSlide < slides.length - 1) {
+                goToSlide(currentSlide + 1);
+            }
+        });
+
+        prevButton.addEventListener('click', () => {
+            if (currentSlide > 0) {
+                goToSlide(currentSlide - 1);
+            }
+        });
+
+        // Initial setup
+        goToSlide(0);
+
+    </script>
+</body>
+</html>
